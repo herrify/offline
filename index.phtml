@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="<?php echo CDN_URL;?>css/guide/css/style.min.css">
+	<title>欢迎进入Widash Plus云平台</title>
+</head>
+<body class="index-body">
+
+
+<div class="wrap-index">
+	<div class="n-bg-img"><img src="<?php echo CDN_URL;?>css/guide/img/banner.png" alt=""></div>
+	
+	<div class="container guide-new-index">
+		<div class="index-top">
+			<div class="n-logo clearfix">
+				<div class="fl"><a href="javascript:;"><img src="<?php echo CDN_URL;?>img/guide/img/b_03.png" alt=""></a></div>
+				<p class="fr">欢迎您，<?php echo $this->USER->username;?>  <a href="<?php echo str_replace("https","http",PAS_URL);?>login/logout?next=<?php echo WEB_URL;?>"><i class="sp sp_b_05"></i>  退出</a></p>
+			</div>
+			<h1 class="tar fwn">欢迎进入Widash Plus云平台</h1>
+			
+			<div class="start-mywifi tar">
+				<?php if($this->USER->agentid){?>
+				<div style="display: inline-block;vertical-align: bottom;text-decoration:underline;cursor:pointer;" id="jump">跳过新手引导</div>
+				<?php }?>
+				<a href="<?php echo WEB_URL.'vectoring/vectoring';?>">开始创建我的Wi-Fi <em>>></em></a>
+			</div>
+			
+		</div>
+	</div>
+
+</div>
+
+<div class="container">
+	<ul class="desc clearfix">
+		<li><div class="purple-block"><span>2分钟快速创建网络</span><i class="sp sp_v_03"></i></div></li>
+		<li><div class="blue-block"><span>设备远程遥控管理</span><i class="sp sp_v_05"></i></div></li>
+		<li><div class="green-block"><span>精选应用专属主页</span><i class="sp sp_v_07"></i></div></li>
+		<li><div class="red-block"><span>用户画像行业洞察</span><i class="sp sp_v_09"></i></div></li>
+	</ul>
+	<div class="n-footer">
+		<p class="tac">Copyright©2007-2015 WiWide Inc 上海迈外迪科技 沪ICP备08023648号</p>
+	</div>
+</div>
+
+<script src="<?php echo CDN_URL;?>js/guide/js/jquery.min.js"></script>	
+<script>
+$("#jump").click(function(){
+	 var $web_url = window.location.protocol+'//'+window.location.host+'/v1';
+	 location.href=$web_url+"/vectoring/jumpload";
+});
+
+$(function(){
+	var winW = $(window).width();
+	var winH = $(window).height();
+	// 低版本的IE
+	var isIE = !document.addEventListener;
+
+	// 调整页面尺寸
+	(function(){
+		if(!isIE) return false;
+
+		if(winW > 1600){
+			$('.container').css({
+				width: '1200px'
+			});
+			$('.index-body .guide-new-index, .n-main-wrap').css({
+				marginLeft: '-600px'
+			});
+		}
+	})();
+
+	(function(){
+		var topImg = $('.n-bg-img').height();
+		var logoTop = 60; 
+		var wifiTop = 138;
+		var top = Math.floor((topImg-logoTop-wifiTop)/2);
+
+		$('.index-top h1').css({
+			marginTop: top + 'px'
+		});
+
+		if(winH > 800){
+			var margin = parseInt((winH-topImg-236-37)/2);
+			margin > 73 && $('.index-body ul.desc').css('margin', margin+'px auto');
+		}
+
+	})();
+	
+});
+</script>
+</body>
+</html>
