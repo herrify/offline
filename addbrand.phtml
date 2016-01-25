@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="<?php echo CDN_URL;?>css/custom.css" />
+    <link rel="stylesheet" href="<?php echo CDN_URL;?>plugins/select/css/select2.min.css">
+    <link rel="stylesheet" href="<?php echo CDN_URL;?>css/guide/css/style.min.css">
+	<title>欢迎进入Widash Plus云平台</title>
+	<script type="text/javascript">
+        var $web_url = window.location.protocol+'//'+window.location.host+'/v1';
+        var $cdn_url = '<?php echo CDN_URL;?>';
+        var $img_url = '<?php echo IMG_URL;?>';
+        var pageData = window.pageData || {
+        	guide_id : <?php echo $this->guide; ?> || 1
+        	,sectors_sub: <?php echo json_encode($this->sectors_sub) ?> || []
+        	,sub_sector_id: "<?php echo $this->brandinfo['sub_sector_id']?>"
+        }
+    </script>
+<style>
+	.close{
+		display:none;
+	}
+	.hidden{
+		visibility: hidden;
+	}
+	.show{
+		display:block;
+	}
+	.address .select2-container{
+		width: 73px!important;
+	}
+	.sel-put-wrap-select .select2-container{
+		width:230px!important;
+	}
+</style>
+</head>
+<body>
+
+<div class="main-body"><img src="<?php echo CDN_URL;?>css/guide/img/main-bg.jpg" alt=""></div>
+
+<div class="n-main-wrap">
+<div class="n-logo clearfix">
+	<div class="fl"><a href="javascript:;"><img src="<?php echo CDN_URL;?>img/guide/img/b_03.png" alt=""></a></div>
+	<p class="fr">欢迎您，<?php echo $this->USER->username;?>  <a href="<?php echo str_replace("https","http",PAS_URL);?>login/logout?next=<?php echo WEB_URL;?>"><i class="sp sp_b_05"></i>  退出</a></p>
+</div>
+
+<div class="container mainh clearfix">
+	<!-- 左侧导航 -->
+	<div class="nav-left fl "> 
+		<div class="nav-route radius-lt-8">
+			<!-- 图标 -->
+			<i class="scroll sp sp_f_03"></i>
+
+			<div class="routes">
+				<!-- 创建品牌 -->
+				<div class="r-step crt-pp ff-1" data-id="lou-1">
+					<div class="f1 clearfix">
+						<i class="fl sp sp_b_10 current-step-img" data-img='{"orange": "sp_b_10", "gray": "sp_b_10"}'></i>
+						<span class="orange"><em>1</em> 创建品牌</span>
+					</div>				
+				</div>
+				
+				<!-- 箭头 -->
+				<div class="route-line tac ff-2">
+					<i class="sp sp_b_32" ></i>
+				</div>
+
+				<!-- 创建场所 -->
+				<div class="r-step crt-pp ff-2" data-id="lou-2">
+					<div class="f2 clearfix">
+						<i class="fl sp sp_b_19" data-img='{"orange": "sp_b_17", "gray": "sp_b_19"}'></i>
+						<span><em>2</em> 创建场所</span>
+					</div>				
+				</div>
+				
+				<!-- 箭头 -->
+				<div class="route-line tac ff-3">
+					<i class="sp sp_b_32" ></i>
+				</div>
+
+				<!-- 添加设备 -->
+				<div class="r-step crt-pp ff-3" data-id="lou-3">
+					<div class="f3 clearfix">
+						<i class="fl sp sp_b_24" data-img='{"orange": "sp_b_23", "gray": "sp_b_24"}'></i>
+						<span><em>3</em> 添加设备</span>
+					</div>				
+				</div>
+				
+				<!-- 箭头 -->
+				<div class="route-line tac ff-4">
+					<i class="sp sp_b_32" ></i>
+				</div>
+
+				<!-- 添加网络 -->
+				<div class="r-step crt-pp ff-4" data-id="lou-4">
+					<div class="f4 clearfix">
+						<i class="fl sp sp_b_28" data-img='{"orange": "sp_b_27", "gray": "sp_b_28"}'></i>
+						<span><em>4</em> 添加网络</span>
+					</div>				
+				</div>
+				
+				<!-- 箭头 -->
+				<div class="route-line tac ff-5">
+					<i class="sp sp_b_32" ></i>
+				</div>
+
+				<!-- 完成 -->
+				<div class="r-step crt-pp ff-5" data-id="lou-5">
+					<div class="f5 clearfix">
+						<i class="fl sp sp_b_36 " data-img='{"orange": "sp_b_35", "gray": "sp_b_36"}'></i>
+						<span><em>5</em> 完成</span>
+					</div>				
+				</div>								
+			</div>
+
+		</div>
+	</div>
+
+	<!-- 右侧主体内容1 -->
+	<div class="main-content fl  <?php echo $this->guide == 1 ? 'show' : 'close'; ?>" id="lou-1">
+		<div class="wap-callout">
+			<div class="callout">
+				请填写您的场所所属品牌的信息
+				<p>准确的品牌信息将成为您行业数据分析的基础</p>
+			</div>
+		</div>
+
+		<!-- 填写表格 -->
+		<div class="wrap-ul-button">
+			<ul class="step-form clearfix">
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 品牌名称</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl form-border">
+							<label class="lab-holder" for="brand-name">请输入您的场所所属的品牌</label>
+							<input type="text" id="brand-name" class="w-duan" text-maxlength="15" value="<?php output($this->brandinfo['brand_name']); ?>">
+							<input type="hidden" id="brandid" value="<?php output($this->brandinfo['id']);?>">
+							<span class="words-num ft12"><i class="red">0</i>/15</span>
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>
+
+				<li>
+					<div class="fl t-name"><em class="red">&nbsp;</em> L O G O</div>
+
+					<div class="img-panel inline-block" id="brand_lg">
+						
+						<div class="img-upload-box" style="<?php if ($this->brandinfo['logo']) echo ("display: none;")?>">
+							<div class="drag-panel">
+								<label class="img-upload">
+									<input class="remove" type="file" name="upload">
+								</label>
+							</div>									
+						</div>
+						
+						<div class="img-upload-view" style="width:130px;">
+							<?php if ($this->brandinfo['logo']){?>
+							<div class="border" style="padding:1px">
+								<div class="img-wrap preview">
+									<img src="<?php echo ($this->brandinfo['logo']) ?>">
+									<div class="mask bg-orange absolute full-size top left">
+										<p class="t-center" style="margin-top:40px;">
+											<label role="button" >更换
+												<input class="remove" type="file" name="upload">
+											</label>
+										</p>
+									</div>
+								</div>
+							</div>
+							<?php } ?>
+						</div>
+						<p class="notice ft12" style="margin:0;line-height:2em;">支持JPG、JPEG、GIF和PNG文件，最大2M</p>
+						<input id="brand_logo" name="brand_logo" value="<?php echo $this->brandinfo['logo']?>" 
+								type="hidden" bind="#brand_lg" alt="logo" />
+					</div>
+
+				</li>	
+
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl sel-put-wrap-select">
+							<select name="sel-industry" id="sector_id">
+								<option value="default">选择行业类型</option>
+								<?php
+									$i=0; 
+									foreach ($this->sectors as $key=>$value){
+										$i++;
+									?>								
+		                            <option value="<?php output($value['id']);?>" <?php if($this->brandinfo['sector_id'] == $value['id'] || $this->brandinfo['sector_id'] == $i) echo("selected");?> ><?php output($value['name']);?></option>
+		                            <?php 
+		                            }
+		                            ?>
+							</select>
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>	
+
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 领&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;域</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl sel-put-wrap-select">
+							<select id="sub_sector_id" name="sel-field" alt="细分领域" formcheck required>
+								<option value="default">请选择领域</option>
+							</select>
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>			
+		
+			</ul>
+
+			<div class="button-div tar">
+				<input class="btn radius4" type="button" name="button1" value="下一步">
+			</div>
+		</div>
+
+	</div>
+
+	<!-- 右侧主体内容2 shop-->
+	<div class="main-content fl <?php echo $this->guide == 2 ? 'show' : 'close'; ?>" id="lou-2">
+		<div class="wap-callout">
+			<div class="callout">
+				请填写您的场所信息
+				<p>真实的场所信息将为您带来更优质的售后服务</p>
+			</div>
+		</div>
+
+		<!-- 填写表格 -->
+		<div class="wrap-ul-button">
+			<ul class="step-form clearfix">
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 场所名称</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl form-border">
+							<label class="lab-holder" for="place-name">请输入您的场所名称</label>
+	                        <input type="hidden" id="shopid" value="<?php output($this->shopinfo['id']);?>">
+							<input type="text" id="place-name" class="w-duan" text-maxlength="50"  value="<?php output($this->shopinfo['name']); ?>">
+							<span class="words-num ft12"><i class="red">0</i>/50</span>
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>
+
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 所属品牌</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl sel-put-wrap-select">
+							<select name="sel-brand" >
+								<option value="<?php output($this->brandinfo['id']);?>" selected ><?php output($this->brandinfo['brand_name']);?></option>
+							</select>
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>	
+
+
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</div>
+					<div class="fl t-con address">
+
+<?php if($this->USER->businesstype<>4){?>
+
+
+						<div class="sel-put-wrap fl" style="width:230px;">
+                            <ul style="width:100%">
+                              <li style="width:70px;float:left;margin-right:8px">
+                                <select  name="sel-province" data-placeholder="选择省" id="selectprovince" onChange="Utils.Formelements.switchProvinceCityDistrict(this);">
+                                </select>
+                                
+                              </li>
+                              <li style="width:70px;float:left;margin-right:8px">
+                                <select  name="sel-city" data-placeholder="选择市" id="selectcity" onChange="Utils.Formelements.switchProvinceCityDistrict(this);">
+                                </select>
+                              </li>
+                              <li style="width:70px;">
+                                <select  name="sel-area" data-placeholder="选择区" id="selectdistrict" onChange="Utils.Formelements.switchProvinceCityDistrict(this);">
+                                </select>
+                              </li>
+                            </ul>
+	                 
+
+						</div>
+<?php }?>
+
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+
+						<div class="lab-address fl" style="position:relative;margin-top:0;">
+							<div class="sel-put-wrap fl form-border">
+								<label class="lab-holder" for="detail-address">请输入您的场所详细地址</label>
+								<input type="text" id="detail-address" text-maxlength="50" value="<?php output($this->shopinfo['address']); ?>">
+							</div>
+							<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+						</div>
+					</div>
+				</li>
+
+				<li>
+					<div class="fl t-name"><em>&nbsp;</em> 联 系 人</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl form-border">
+							<input type="text" name="link-man" text-maxlength="15" value="<?php output($this->shopinfo['manager']); ?>">
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>	
+
+				<li>
+					<div class="fl t-name"><em>&nbsp;</em> 联系电话</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl form-border">
+							<input type="text" name="link-tel" value="<?php output($this->shopinfo['manager_tel']); ?>">
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>
+		
+			</ul>
+
+			<div class="button-div tar">
+				<input  type="button" class="btn radius4 bgc-gray" onclick="oNewUpdate.preStep(1)" value="上一步">
+				<input class="btn radius4" type="button" name="button2" value="下一步">
+			</div>
+		</div>
+
+	</div>
+
+	<!-- 右侧主体内容3 device -->
+	<div class="main-content fl <?php echo $this->guide == 3 ? 'show' : 'close'; ?>" id="lou-3">
+		<div class="wap-callout">
+			<div class="callout">
+				请添加您的设备
+			</div>
+		</div>
+
+		<!-- 填写表格 -->
+		<div class="wrap-ul-button">
+			<ul class="step-form clearfix">
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 设备编码</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl form-border">
+							<label class="lab-holder" for="ly-code">编码位于路由器背面</label>
+                            <input type="hidden" id="deviceid" value="<?php echo $this->deviceinfo['id'];?>">
+							<input type="text" style="width:100%" id="ly-code" <?php if($this->deviceinfo['id'])echo 'disabled';?> text-maxlength="32" value="<?php echo $this->deviceinfo['serial_number'];?>">
+						</div>
+						<div class="error-wrap"><div id='red' class="error-tips hide red ft12"></div></div>
+
+						<div class="bar-img fl">
+							<img src="<?php echo CDN_URL;?>img/guide/img/bar-code.jpg" alt="设备编码">
+						</div>
+					</div>
+				</li>
+
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 场&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl sel-put-wrap-select">
+							<select name="sel-place" >						
+								<option value="<?php output($this->shopinfo['id']);?>"><?php output($this->shopinfo['name']);?></option>
+							</select>
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>			
+
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 安装位置</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl form-border">
+							<label class="lab-holder" for="install-pos">方便设备管理，例如：餐桌旁</label>
+							<input type="text" id="install-pos" text-maxlength="15" value="<?php output($this->deviceinfo['name']); ?>">
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>
+		
+			</ul>
+
+			<div class="button-div tar">
+				<input type="button" class="btn radius4 bgc-gray" onclick="oNewUpdate.preStep(2)" value="上一步">
+				<input class="btn radius4" type="button" name="button3" value="下一步">
+			</div>
+		</div>
+
+	</div>
+	
+    <!-- 右侧主体内容4 network -->
+	<div class="main-content fl <?php echo $this->guide == 4 ? 'show' : 'close'; ?>" id="lou-4">
+		<div class="wap-callout">
+			<div class="callout">
+				请添加您的网络
+			</div>
+		</div>
+
+		<!-- 填写表格 -->
+		<div class="wrap-ul-button">
+			<ul class="step-form clearfix">
+
+				<li>
+					<div class="fl t-name"><em class="red">*</em> SSID </div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl form-border">
+							<label class="lab-holder" for="add-ssid" title="无线网的名称，支持中文、英文、数字、短横线、下划短横线">支持中文、数字、字母...</label>
+	                        <input type="hidden" id="networkid" value="<?php output($this->networkinfo['id']);?>">
+							<input type="text" class="w-duan" text-maxlength="32" id="add-ssid" value="<?php output($this->networkinfo['public_ssid']);?>" >
+							<span class="words-num ft12"><i class="red">0</i>/32</span>
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+					</div>
+				</li>
+
+				<li>
+					<div class="fl t-name"><em class="red">*</em> 场&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所</div>
+					<div class="fl t-con">
+						<div class="sel-put-wrap fl sel-put-wrap-select">
+							<select name="sel-place" >
+								<option value="<?php echo $this->shopinfo['id'];?>"><?php output($this->shopinfo['name']);?></option>
+							</select>
+						</div>
+						<div class="error-wrap"><div class="error-tips hide red ft12"></div></div>
+
+						<div class="ssid-img fl">
+							<img src="<?php echo CDN_URL;?>img/guide/img/gd-4_10.png" alt="">
+						</div>
+					</div>
+				</li>		
+	
+			</ul>
+
+			<div class="button-div tar">
+				<input  type="button" class="btn radius4 bgc-gray" onclick="oNewUpdate.preStep(3)" value="上一步">
+				<input class="btn radius4" type="button" name="button4" value="完成">
+			</div>
+		</div>
+
+	</div>
+	
+    <!-- 右侧主体内容5 success -->
+	<div class="main-content fl <?php echo $this->guide == 5 ? 'show' : 'close'; ?>" id="lou-5">
+		<div class="wap-callout page5">
+			<div class="callout">
+				恭喜您，配置完成。设备正在初始化...
+			</div>
+		</div>
+
+		<!-- 完成配置 -->
+		<div class="cof-over clearfix">
+			<div class="fl phone-show">
+				<div class="phone-animate">
+					<ul class="phone-inner"></ul>
+				</div>
+				<!-- <p class="qst tac">联网时遇到问题了？<a href="">查看帮助</a> <i class="sprite sprite-question"></i></p> -->
+			</div>
+			<div class="fr show-step">
+				<p>稍等几分钟后，您可按照如下方式联网：</p>
+				<ul class="clearfix">
+					<li class="right-step-1 pointer curr-s1">
+						<div class="fl center stp"><i class="sprite sprite-gu-5_03">1</i></div>
+						<p class="fl sel-ssid">选择SSID</p>
+					</li>
+					<li class="right-step-2">
+						<div class="fl"><i class="s-line line-gray"></i></div>
+						<p class="fl"></p>
+					</li>
+					<li class="right-step-2 pointer curr-s2">
+						<div class="fl center stp"><i class="sprite sprite-gu-5_09">2</i></div>
+						<p class="fl">等待自动弹出Portal<br />或 打开浏览器输入任一网址</p>
+					</li>
+					<li class="right-step-3">
+						<div class="fl"><i class="s-line line-gray"></i></div>
+						<p class="fl"></p>
+					</li>
+					<li class="right-step-3 pointer curr-s3">
+						<div class="fl center stp"><i class="sprite sprite-gu-5_09">3</i></div>
+						<p class="fl">进行手机号认证登录<br />或 微信一键登录</p>
+					</li>
+					<li class="right-step-4">
+						<div class="fl"><i class="s-line line-gray"></i></div>
+						<p class="fl"></p>
+					</li>
+					<li class="right-step-4 pointer curr-s4">
+						<div class="fl center stp"><i class="sprite sprite-gu-5_09">4</i></div>
+						<p class="fl last">
+							成功登录后，进入商家主页<br />
+							<span>您可以定制自己的商家主页哦！<br /><a href="<?php echo WEB_URL."vectoring/success?fromGuide=yes&appStore=yes";?>">去试试</a></span>
+						</p>
+					</li>					
+				</ul>
+
+				<div class="go-plus tar">
+					<input type="button" onclick="location.href='<?php echo WEB_URL."vectoring/success?fromGuide=yes";?>'" class="btn radius4 hide" value="进入WidashPlus首页">
+				</div>
+			</div>		
+		</div>
+	</div>
+
+</div>
+<div class="container-shadow"></div>
+
+
+<div class="n-footer">
+	<p class="tac">Copyright©2007-2015 WiWide Inc 上海迈外迪科技 沪ICP备08023648号</p>
+</div>
+
+</div>
+<!--js-->	
+<script src="<?php echo CDN_URL;?>js/guide/js/jquery.min.js"></script>	
+<script src="<?php echo CDN_URL;?>js/guide/js/all.min.js"></script>	
+<script src="<?php echo CDN_URL;?>js/guide/js/civen.js"></script>
+<script src="<?php echo CDN_URL;?>plugins/select/js/select2.js"></script>	
+<script>
+	// 调整页面尺寸
+	(function(){
+		var winW = $(window).width();
+		// 低版本的IE
+		var isIE = !document.addEventListener;
+
+		if(winW < 1600 || !isIE) return false;
+
+		$('.container').css({
+			width: '1200px'
+    		,height: '750px'
+		});
+		$('.index-body .guide-new-index, .n-main-wrap').css({
+			marginLeft: '-600px'
+		});
+		$('.nav-left .routes').css({
+			marginLeft: '150px'
+		});
+		$('.nav-left .nav-route').css({
+			marginTop: '58px'
+		});
+		$('.main-content').css({
+			marginLeft: '75px'
+    		,paddingTop: '63px'
+		});
+	})();
+</script>
+<script  language="JavaScript">  
+	// 处理行业和领域的选择
+	(function(){
+		var newSubCat = {};
+		$.each(pageData.sectors_sub, function(k, v){
+			if(!v.sector_id) return true;
+			if(newSubCat[v.sector_id] === undefined) newSubCat[v.sector_id] = [];
+
+			newSubCat[v.sector_id].push( v );
+		});
+
+		function fnSelect(){
+			var sector_id = $('#sector_id').val(),
+				selected = '',
+				childData = '<option value="default">请选择领域</option>';
+
+			newSubCat[sector_id] && $.each(newSubCat[sector_id], function(k, v){
+				selected = (pageData.sub_sector_id == v.id || k === 0) ? 'selected' : '';
+
+				childData += "<option value='"+v.id+"' "+selected+">"+v.sub_name+"</option>";
+			});
+
+			$("#sub_sector_id").html( childData );
+
+			var text = $("#sub_sector_id option:selected").text();
+			$('span[id^="select2-sub_sector_id"]').html( text );
+		}
+
+		fnSelect();
+		$("#sector_id").bind('change', function(){
+			fnSelect();
+		});
+
+	})();
+
+</script> 
+
+
+<script>
+$(function(){
+	var check = oGuide.fnCheckPage1();
+	var reqUrl = $web_url + '/vectoring/editbrand';
+
+	$('input[name="button1"]').bind('click', function(){
+		if(!oGuide.fnCheckPage1().checkForm()) return false;
+		var brandName = $.trim( $('#brand-name').val() );
+		var id = $.trim( $('#brandid').val() );
+
+		var params = {
+			id:id,
+			brand_name: brandName,
+			logo: $("input#brand_logo").val(),
+			sector_id: $('select[name="sel-industry"]').val(),
+			sub_sector_id: $('select[name="sel-field"]').val()
+		};
+		$.post(reqUrl, params, function(res){
+			res = $.parseJSON(res);
+
+			if(res.ret == '-3'){
+				var aMsg = res.msg.split('|');
+				switch(aMsg[1]){
+					case 'brand_name':
+						oGuide.fnGetCurrError( $('#brand-name') ).show().html( aMsg[0] );
+						break;
+					case 'sector_id':
+						oGuide.fnGetCurrError( $('select[name="sel-industry"]') ).show().html( aMsg[0] );
+						break;
+					case 'sub_sector_id':
+						oGuide.fnGetCurrError( $('select[name="sel-field"]') ).show().html( aMsg[0] );
+						break;
+					default:
+						break;
+
+				}
+			}else if(res.ret == 1){
+				oNewUpdate.nextStep( 2 );
+
+				//静态将brandid 赋值
+				if($("#brandid").val()==''){
+					var selBrand = $('select[name="sel-brand"]').children().eq(0);
+					$("#brandid").val(res.data);
+					selBrand.val(res.data); 
+					selBrand.text(res.msg); 
+				} 
+				$('span[id^="select2-sel-brand"]').html(res.msg);
+			}
+		});
+
+		
+	});
+
+
+	// 文件上传	
+	Civen.upload({
+		file_input: ".img-upload input",
+		url: $web_url+"/image/upload",
+		expansion:{
+			type: "logo",
+			width: 120,
+			height: 120
+		},
+		onstart: function(){
+			Civen.message('正在上传');
+			return true;
+		},
+		callback: function(data, obj){
+			obj.parents('.img-panel').find('input[name="brand_logo"]').val($img_url+data.img_url);
+
+			obj.parents('.img-panel').find('.img-upload-view').html('<div class="border" style="padding:1px"><div class="img-wrap preview"><img src="'+$img_url+data.img_url+'"><div class="mask bg-orange absolute full-size top left"><p class="t-center" style="margin-top:80px;"><a href="javascript:;" onclick="$(this).parents(\'.img-upload-view\').prev().find(\'.img-upload input\').click();">更换</a></p></div></div></div>');
+			
+			obj.parents('.img-panel').find('.img-upload-box').hide();
+		}
+	});
+
+	// 文件上传	
+	Civen.upload({
+		file_input: 'label[role="button"] input',
+		url: $web_url+"/image/upload",
+		expansion:{
+			type: "logo",
+			width: 120,
+			height: 120
+		},
+		onstart: function(){
+			Civen.message('正在上传');
+			return true;
+		},
+		callback: function(data, obj){
+			$('.img-wrap img').attr('src', $img_url+data.img_url);
+		}
+	});
+
+});	
+
+</script>
+<!--shop-->
+<script type="text/javascript" charset="utf-8" src="<?php echo CDN_URL;?>js/chosen.jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo CDN_URL;?>js/area.js"></script>
+<script type="text/javascript" charset="utf-8" src="<?php echo CDN_URL;?>js/henry.js"></script>
+<script>
+<?php if( ($this->shopinfo['province']) && ($this->USER->businesstype<>4)){?>
+
+//Utils.Floatlayer.jqueryChosen();//需要引入chosen.jquery.js  input样式层
+
+
+
+Utils.Formelements.setProvinceCityDistrict(<?php output($this->shopinfo['province']) ? $this->escape($this->shopinfo['province']) : 0;?>, <?php output($this->shopinfo['city']) ? $this->escape($this->shopinfo['city']) : 0;?>, <?php output($this->shopinfo['area']) ? $this->escape($this->shopinfo['area']) : 0;?>);//绑定省市区
+<?php }elseif($this->USER->businesstype<>4){?>
+	Utils.Formelements.setProvinceCityDistrict(0,0,0);//绑定省市区
+<?php }?>
+
+</script>
+
+<script>
+$(function(){
+	var check = oGuide.fnCheckPage2();
+	var reqUrl = "<?php echo WEB_URL.'vectoring/editshop';?>";
+
+	$('input[name="button2"]').bind('click', function(){
+		if(!oGuide.fnCheckPage2().checkForm()) return false;
+		var shopName = $.trim( $('#place-name').val() );
+
+		var params = {
+			id:$.trim( $('#shopid').val() ),
+			name: shopName,
+			address: $.trim( $('#detail-address').val() ),
+			brandid: $('select[name="sel-brand"]').val(),
+			brandname: $('select[name="sel-brand"] option:selected').text(),
+
+<?php if($this->USER->businesstype<>4){?>
+
+			province: document.getElementById("selectprovince").value,
+			city: document.getElementById("selectcity").value,
+			area: document.getElementById("selectdistrict").value,
+
+<?php }?>
+
+			manager: $.trim( $('input[name="link-man"]').val() ),
+			manager_tel: $.trim( $('input[name="link-tel"]').val() )
+		};
+
+		$.post(reqUrl, params, function(res){
+
+			res = $.parseJSON(res);
+
+			if(res.ret == '-3'){
+				var aMsg = res.msg.split('|');
+				switch(aMsg[1]){
+					case 'name':
+						oGuide.fnGetCurrError( $('#place-name') ).show().html( aMsg[0] );
+						break;
+					case 'address':
+						oGuide.fnGetCurrError( $('#detail-address') ).show().html( aMsg[0] );
+						break;
+					case 'brandid':
+						oGuide.fnGetCurrError( $('select[name="sel-brand"]') ).show().html( aMsg[0] );
+						break;
+					case 'brandname':
+						oGuide.fnGetCurrError(  $('select[name="sel-brand"]') ).show().html( aMsg[0] );
+						break;
+					case 'province':
+						oGuide.fnGetCurrError( $('select[name="sel-province"]') ).show().html( aMsg[0] );
+						break;
+					case 'city':
+						oGuide.fnGetCurrError( $('select[name="sel-city"]') ).show().html( aMsg[0] );
+						break;
+					case 'area':
+						oGuide.fnGetCurrError( $('select[name="sel-area"]') ).show().html( aMsg[0] );
+						break;
+					case 'link-tel':
+						oGuide.fnGetCurrError( $('input[name="link-tel"]') ).show().html( aMsg[0] );
+						break;
+					default:
+						break;
+
+				}
+			}else if( res.ret == 1 ){
+				oNewUpdate.nextStep( 3 );
+
+				if($("#shopid").val()==''){
+					var selPlace = $('select[name="sel-place"]').children().eq(0);
+					$("#shopid").val(res.data.shopid);
+					selPlace.val(res.data.shopid); 
+					selPlace.text(res.data.shopname); 
+				}
+				
+				$('span[id^="select2-sel-place"]').html(res.data.shopname);	
+
+			}
+		
+	});
+
+	});
+		
+});
+	
+</script>
+
+<!--device-->
+
+<script>
+
+
+$("#ly-code").on("blur ",function() {
+	var serial_number = $.trim($("#ly-code").val()); 
+	var dataString = 'serial_number='+ serial_number;
+
+	if( !serial_number ){
+		return false;
+	}
+
+	$.post($web_url+'/vectoring/verifydevice', dataString, function(res){
+			res = $.parseJSON(res);
+
+			if(res.ret <0){
+				var aMsg = res.msg.split('|');
+				oGuide.fnGetCurrError( $('#ly-code') ).show().html( '<i class="sprite sprite-cross"></i> ' + aMsg[0] );
+			}else{
+				oGuide.fnGetCurrError( $('#ly-code') ).show().html( '<i class="sprite sprite-check"></i>' );
+			}
+		
+	});
+		
+});
+
+
+$(function(){
+	var check = oGuide.fnCheckPage3();
+	var reqUrl = "<?php echo WEB_URL.'vectoring/adddevice';?>";	
+	
+	$('input[name="button3"]').bind('click', function(){
+		if(!oGuide.fnCheckPage3().checkForm()) return false;
+		var deviceid = $.trim( $('#deviceid').val() );
+		var params = { 'array': {
+				deviceid:deviceid,
+				serial_number: $.trim( $('#ly-code').val() ),
+				name: $.trim( $('#install-pos').val() ),
+				shop_id: $('select[name="sel-place"]').val()
+			}
+		}
+
+		$.post(reqUrl, params, function(res){
+			res = $.parseJSON(res);
+
+			if(res.ret == '-3'){
+				var aMsg = res.msg.split('|');
+				switch(aMsg[1]){
+					case 'serial_number':
+						oGuide.fnGetCurrError( $('#ly-code') ).show().html( aMsg[0] );
+						break;
+					case 'name':
+						oGuide.fnGetCurrError( $('#install-pos') ).show().html( aMsg[0] );
+						break;
+					case 'shop_id':
+						oGuide.fnGetCurrError( $('select[name="sel-place"]') ).show().html( aMsg[0] );
+						break;
+					default:
+						break;
+
+				}
+			}else if(res.ret == 1){
+				oNewUpdate.nextStep( 4 );
+
+				if($("#deviceid").val()==''){
+					$("#deviceid").val(res.data);
+				}
+
+			}
+		});
+
+		
+	});
+});	
+</script>
+
+
+<!--network-->
+<script>
+$(function(){
+	var check = oGuide.fnCheckPage4();
+	var reqUrl = "<?php echo WEB_URL.'vectoring/editnetwork';?>";
+	
+
+	$('input[name="button4"]').bind('click', function(){
+		if(!oGuide.fnCheckPage4().checkForm()) return false;
+		var networkid = $.trim( $('#networkid').val() );
+		var params = {
+			networkid:networkid,
+			SSID: $.trim( $('#add-ssid').val() ),
+			'sel-place': $('select[name="sel-place"]').val()
+		}
+
+		$.post(reqUrl, params, function(res){
+			res = $.parseJSON(res);
+
+			if(res.ret == '-3'){
+				var aMsg = res.msg.split('|');
+				switch(aMsg[1]){
+					case 'SSID':
+						oGuide.fnGetCurrError( $('#add-ssid') ).show().html( aMsg[0] );
+						break;
+					case 'sel-place':
+						oGuide.fnGetCurrError( $('select[name="sel-place"]') ).show().html( aMsg[0] );
+						break;
+					default:
+						break;
+
+				}
+			}else if(res.ret == 1){
+
+				oNewUpdate.nextStep( 5 );
+				if($("#networkid").val()==''){
+					$("#networkid").val(res.data);
+				}
+				
+				// 执行动画
+				execAnimate.execStep1();
+			}
+		});
+
+		
+	});
+});	
+</script>
+
+	
+</body>
+</html>
